@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Lista de Posts{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2 class="mb-4">Posts Recientes</h2>
+        {% if posts %}
+            <ul class="list-group">
+                {% for post in posts %}
+                    <li class="list-group-item">
+                        <h3><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h3>
+                        <p class="mb-1">por {{ post.author.name }} el {{ post.created_at }}</p>
+                        <p class="mb-0">{{ post.content|truncatewords:30 }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay publicaciones todavía.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

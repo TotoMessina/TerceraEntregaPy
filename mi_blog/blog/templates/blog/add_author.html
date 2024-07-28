@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Agregar Autor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h2 class="mb-4">Agregar Nuevo Autor</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

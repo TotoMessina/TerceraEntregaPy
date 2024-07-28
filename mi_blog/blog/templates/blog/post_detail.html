@@ -1,0 +1,37 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <article class="mb-4">
+            <h2>{{ post.title }}</h2>
+            <p class="text-muted">por {{ post.author.name }} el {{ post.created_at }}</p>
+            <div>{{ post.content }}</div>
+        </article>
+
+        <section class="comments">
+            <h3>Comentarios</h3>
+            <ul class="list-group mb-4">
+                {% for comment in comments %}
+                    <li class="list-group-item">
+                        <p>{{ comment.text }}</p>
+                        <p class="mb-0 text-muted"><em>por {{ comment.author }} el {{ comment.created_at }}</em></p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="add-comment">
+            <h3>Agregar Comentario</h3>
+            <form method="post" class="mb-4">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
